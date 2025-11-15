@@ -1,11 +1,170 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>我的网站</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>随便网站 — 静态示例</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f7f7fb;--card:#ffffff;--muted:#6b7280;--accent:#6d28d9}
+    [data-theme="dark"]{--bg:#0b1020;--card:#0f1724;--muted:#9ca3af;--accent:#7c3aed}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{background:linear-gradient(180deg,var(--bg),#fff);color:var(--muted);-webkit-font-smoothing:antialiased}
+    .container{max-width:1100px;margin:32px auto;padding:20px}
+    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,#6366f1,#ec4899);color:#fff;font-weight:800}
+    h1{margin:0;font-size:18px;color:var(--card);font-weight:800}
+    .subtitle{font-size:12px;color:var(--muted);margin-top:2px}
+    nav a{margin-left:14px;text-decoration:none;color:var(--muted);font-weight:600}
+    .card{background:var(--card);border-radius:14px;padding:18px;box-shadow:0 6px 22px rgba(2,6,23,0.06);color:unset}
+    .hero{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center}
+    .hero h2{margin:0;font-size:28px;color:var(--card);line-height:1.05}
+    .hero p{color:var(--muted);margin-top:10px}
+    .input-row{display:flex;gap:8px;margin-top:14px}
+    .input-row input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);outline:none}
+    .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
+    .small-btn{padding:8px 10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent;cursor:pointer}
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
+    .card img{width:100%;height:160px;object-fit:cover;border-radius:10px}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+    .feature{padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(0,0,0,0.02),transparent)}
+    footer{text-align:center;margin-top:26px;color:var(--muted);font-size:13px}
+    @media (max-width:800px){.hero{grid-template-columns:1fr}.features{grid-template-columns:1fr}}
+  </style>
 </head>
-<body>
-  <h1>Hello, GitHub Pages!</h1>
-  <p stype="color:#0000ff;">这是我用 GitHub 搭建的网站。</p>
-</body>
+<body data-theme="light">
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">随</div>
+        <div>
+          <div style="font-weight:800;color:var(--card)">随便网站</div>
+          <div class="subtitle">随机创意 · 静态示例</div>
+        </div>
+      </div><div>
+    <nav>
+      <a href="#features">功能</a>
+      <a href="#gallery">画廊</a>
+      <a href="#contact">联系</a>
+      <button id="themeToggle" class="small-btn" style="margin-left:10px">夜间</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="card hero">
+    <div>
+      <h2>一个随便的网站 — 静态版，看起来也不错。</h2>
+      <p>包含主题切换、画廊、功能卡片和演示用表单。把这个文件保存为 <code>index.html</code> 后直接打开即可。</p>
+
+      <form id="quickForm" onsubmit="return false;">
+        <div class="input-row">
+          <input id="kw" placeholder="输入一点关键词试试（比如：赛博朋克早餐）">
+          <button class="btn" id="genBtn">生成</button>
+        </div>
+      </form>
+
+      <div id="hint" style="margin-top:12px;color:var(--muted);font-size:14px"></div>
+
+      <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+        <div style="font-size:13px;color:var(--muted)">快速示例：</div>
+        <button class="small-btn" onclick="setKw('赛博朋克早餐')">赛博朋克早餐</button>
+        <button class="small-btn" onclick="setKw('AI 家庭伦理剧')">AI 家庭伦理剧</button>
+      </div>
+    </div>
+
+    <div style="position:relative">
+      <div style="border-radius:12px;overflow:hidden;">
+        <img src="https://source.unsplash.com/random/800x600?technology" alt="demo">
+      </div>
+      <div style="position:absolute;left:16px;bottom:-18px;background:linear-gradient(90deg,#ec4899,#6366f1);color:white;padding:8px 12px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.18)">随机示例图片</div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:18px">
+      <h3 style="margin:0;color:var(--card)">功能</h3>
+      <p style="margin:0;color:var(--muted)">演示用的组件</p>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <strong>即时创意</strong>
+        <div style="margin-top:6px;color:var(--muted);font-size:14px">随机生成短段子、图像提示与小剧本。</div>
+      </div>
+      <div class="feature">
+        <strong>画廊展示</strong>
+        <div style="margin-top:6px;color:var(--muted);font-size:14px">示例图片来自 Unsplash（仅演示用途）。</div>
+      </div>
+      <div class="feature">
+        <strong>快速联系</strong>
+        <div style="margin-top:6px;color:var(--muted);font-size:14px">简单的表单用于展示交互（不会发邮件）。</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" class="card" style="margin-top:18px">
+    <h4 style="margin:0 0 12px 0;color:var(--card)">画廊</h4>
+    <div class="gallery" id="galleryGrid">
+      <!-- JS will populate cards -->
+    </div>
+  </section>
+
+  <section id="contact" class="card" style="margin-top:18px">
+    <h4 style="margin:0 0 12px 0;color:var(--card)">联系（演示）</h4>
+    <form onsubmit="alert('演示 - 表单已提交 🎉');return false;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <input placeholder="你的姓名" style="padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)">
+        <input placeholder="你的邮箱" style="padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)">
+        <textarea placeholder="写点什么..." style="grid-column:1 / -1;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);min-height:120px"></textarea>
+        <button class="btn" style="grid-column:1 / -1">发送</button>
+      </div>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 随便网站 · 静态 HTML 示例。保存为 <code>index.html</code> 并打开即可。</p>
+  </footer>
+</main>
+
+  </div>  <script>
+    (function(){
+      const themeBtn = document.getElementById('themeToggle');
+      const body = document.body;
+      let dark = false;
+      function updateTheme(){
+        body.setAttribute('data-theme', dark ? 'dark' : 'light');
+        themeBtn.textContent = dark ? '白天' : '夜间';
+      }
+      themeBtn.addEventListener('click', () => { dark = !dark; updateTheme(); });
+      updateTheme();
+
+      const galleryGrid = document.getElementById('galleryGrid');
+      const samples = ['赛博猫','早餐 AI','失控打印机','家庭伦理剧','幽默段子','午夜代码'];
+      for(let i=0;i<6;i++){
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style.padding = '10px';
+        card.innerHTML = `\n          <img src="https://source.unsplash.com/collection/190727/800x600?sig=${i}" alt="${samples[i]}">\n          <div style="margin-top:8px">\n            <strong style=\"display:block;color:var(--card)\">${samples[i]}</strong>\n            <div style=\"color:var(--muted);font-size:13px;margin-top:6px\">即刻灵感：写一个 60 秒的短片，主题围绕“${samples[i]}”。</div>\n          </div>`;
+        galleryGrid.appendChild(card);
+      }
+
+      const genBtn = document.getElementById('genBtn');
+      const kw = document.getElementById('kw');
+      const hint = document.getElementById('hint');
+      function setHint(text){ hint.textContent = text; }
+      genBtn.addEventListener('click', () => {
+        const v = kw.value.trim();
+        setHint(v ? `已收到你的关键词："${v}" —— 随便想一个小点子："${v} 的短片剧本"` : '已收到空关键词，试试点击示例按钮。');
+        setTimeout(()=>setHint(''),3000);
+      });
+      window.setKw = (t)=>{ kw.value = t; setHint(`已填入关键词：${t}`); setTimeout(()=>setHint(''),2000); }
+
+    })();
+  </script></body>
 </html>
